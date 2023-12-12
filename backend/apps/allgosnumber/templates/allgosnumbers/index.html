@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<div class="container mt-5 m-2">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <tr class="table-dark">
+                            <th class="w-3">№</th>
+                            <th class="w-45">Регион</th>
+                            <th class="w-3">Отдел</th>
+                            <th class="w-3">Номер региона</th>
+                            <th class="w-3">Гос номер</th>
+                        </tr>
+                        {% for list_prod in add_numbers %}
+                        <tr>
+                            <td class="w-3">
+                                {{ list_prod.id }}
+                            </td>
+                            <td class="w-45">
+                                {{ list_prod.title }}
+                            </td>
+                            <td class="w-3">
+                                <!--                            {% if camera.status == 'Online' %}-->
+                                <button type="button" class="btn btn-info">123</button>
+                                <!--                            {% else %}-->
+                                <button type="button" class="btn btn-danger">123</button>
+                                <!--                            {% endif %}-->
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                {% if add_numbers.has_previous %}
+                                <a class="page-link" href="?page=1" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                                {% endif %}
+                            </li>
+
+                            {% for page_num in add_numbers.paginator.page_range %}
+                            <li class="page-item {% if add_numbers.number == page_num %}active{% endif %}">
+                                <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                            </li>
+                            {% endfor %}
+
+                            <li class="page-item">
+                                {% if add_numbers.has_next %}
+                                <a class="page-link" href="?page={{ add_numbers.paginator.num_pages }}"
+                                   aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
