@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Category_Region(models.Model):
-    regions = models.CharField("Регионы", max_length=50, unique=True)
+    title = models.CharField("Регионы", max_length=50, unique=True)
     slug = models.SlugField(max_length=50, unique=True)
 
     class Meta:
@@ -10,11 +10,11 @@ class Category_Region(models.Model):
         verbose_name_plural = "Добавление региона"
 
     def __str__(self):
-        return self.regions
+        return self.title
 
 
 class Category_Unaa(models.Model):
-    units = models.CharField("Отделение", max_length=50, unique=True)
+    title = models.CharField("Отделение", max_length=50, unique=True)
     slug = models.SlugField(max_length=50, unique=True)
 
     class Meta:
@@ -22,11 +22,11 @@ class Category_Unaa(models.Model):
         verbose_name_plural = "Добавление отдела УНАА"
 
     def __str__(self):
-        return self.units
+        return self.title
 
 
 class Category_Number(models.Model):
-    numbers = models.CharField("Номера", max_length=50, unique=True)
+    title = models.CharField("Номера", max_length=50, unique=True)
     slug = models.SlugField(max_length=50, unique=True)
 
     class Meta:
@@ -34,7 +34,7 @@ class Category_Number(models.Model):
         verbose_name_plural = "Добавить регионый номер"
 
     def __str__(self):
-        return self.numbers
+        return self.title
 
 
 class Add_Numbers(models.Model):
@@ -48,7 +48,7 @@ class Add_Numbers(models.Model):
     updated = models.DateTimeField(verbose_name="Дата обновления", auto_now=True)
 
     class Meta:
-        ordering = ["-created"]
+        ordering = ["created"]
         verbose_name = "Добовления номеров в базу"
         verbose_name_plural = "Общая база номеров"
 

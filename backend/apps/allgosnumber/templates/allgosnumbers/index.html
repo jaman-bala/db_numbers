@@ -2,31 +2,38 @@
 
 <div class="container mt-5 m-2">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col">
             <div class="card">
                 <div class="card-body">
                     <table class="table table-bordered">
-                        <tr class="table-dark">
+                        <tr class="table-dark text-center">
                             <th class="w-3">№</th>
                             <th class="w-45">Регион</th>
                             <th class="w-3">Отдел</th>
                             <th class="w-3">Номер региона</th>
                             <th class="w-3">Гос номер</th>
+                            <th class="w-3">Дата создания</th>
                         </tr>
                         {% for list_prod in add_numbers %}
-                        <tr>
+                        <tr class="text-center">
                             <td class="w-3">
                                 {{ list_prod.id }}
                             </td>
                             <td class="w-45">
-                                {{ list_prod.title }}
+                                {{ list_prod.category_region }}
+                            </td>
+                            <td class="w-45">
+                                {{ list_prod.category_unaa }}
                             </td>
                             <td class="w-3">
-                                <!--                            {% if camera.status == 'Online' %}-->
-                                <button type="button" class="btn btn-info">123</button>
-                                <!--                            {% else %}-->
-                                <button type="button" class="btn btn-danger">123</button>
-                                <!--                            {% endif %}-->
+                                <button type="button" class="btn btn-outline-dark" disabled>{{ list_prod.category_number }}
+                                </button>
+                            </td>
+                            <td class="w-3">
+                                <button type="button" class="btn btn-light" disabled>{{ list_prod.title }}</button>
+                            </td>
+                            <td class="w-45">
+                                {{ list_prod.created|date:"d.m.Y" }}
                             </td>
                         </tr>
                         {% endfor %}
@@ -62,4 +69,43 @@
         </div>
     </div>
 </div>
+
+<div class="container mt-5 m-2">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <form action="." method="POST">
+                        {% csrf_token %}
+                        <fieldset>
+                            <legend class="text-center">Добавление номеров в базу</legend>
+                            <div class="mb-3">
+                                <label class="form-label">Регион</label>
+                                    {{ form.category_region }}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Отдел УНАА</label>
+                                     {{ form.category_unaa }}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">ГОС гомер</label>
+                                    {{ form.category_number }}
+                            </div>
+                            <div class="row g-2">
+                                <div class="col-auto">
+                                    <label class="visually-hidden">Введите номер</label>
+                                            {{ form.title }}
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary mb-3">Добавить</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
