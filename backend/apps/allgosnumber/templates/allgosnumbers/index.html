@@ -78,17 +78,17 @@
                     <form action="." method="POST">
                         {% csrf_token %}
                         <fieldset>
-                            <legend class="text-center">Добавление номеров в базу</legend>
+                            <legend class="text-center"><strong>Добавление номеров в базу</strong></legend>
                             <div class="mb-3">
-                                <label class="form-label">Регион</label>
+                                <label class="form-label"><strong>Регион</strong></label>
                                     {{ form.category_region }}
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Отдел УНАА</label>
+                                <label class="form-label"><strong>Отдел УНАА</strong></label>
                                      {{ form.category_unaa }}
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">ГОС гомер</label>
+                                <label class="form-label"><strong>ГОС гомер</strong></label>
                                     {{ form.category_number }}
                             </div>
                             <div class="row g-2">
