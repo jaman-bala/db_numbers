@@ -5,9 +5,9 @@ from django.forms import ModelForm, TextInput, Select
 class CreateForm(ModelForm):
     class Meta:
         model = Add_Numbers
-        fields = ['category_region', 'category_unaa', 'category_number', 'title']
+        fields = ['category_types', 'category_unaa', 'category_number', 'title', 'number']
         widgets = {
-            "category_region": Select(attrs={
+            "category_types": Select(attrs={
                 "class": "form-select",
                 'placeholder': 'Выберите регион',
             }),
@@ -21,7 +21,12 @@ class CreateForm(ModelForm):
             }),
             "title": TextInput(attrs={
                 "class": "form-control",
-                'placeholder': 'Введите номер',
+                'placeholder': 'Введите гос номер',
+
+            }),
+            "number": TextInput(attrs={
+                "class": "form-control",
+                'placeholder': 'Введите номер док:',
 
             }),
         }

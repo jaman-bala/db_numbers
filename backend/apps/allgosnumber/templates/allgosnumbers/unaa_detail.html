@@ -1,0 +1,44 @@
+{% extends 'base.html' %} 
+{% block content %} 
+{% load static %}
+
+<div class="container mt-5 m-2">
+    <h2>Отдел: {{ unaa.title }}</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Тип</th>
+                <th>Региональный номер</th>
+                <th>Гос номер</th>
+                <th>Номер заявки</th>
+                <!-- Другие поля, которые вы хотите отобразить -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for add_number in add_numbers %}
+                <tr>
+                    <td>{{ add_number.category_types }}</td>
+                    <<td class="w-3">
+                                <button type="button" class="btn btn-outline-dark" disabled>
+                                    {{ add_number.category_number }}
+                                </button></td>
+                    <td class="w-3">
+                        <button type="button" class="btn btn-light" disabled>
+                            {{ add_number.title }}
+                            </button>
+                    </td>
+                    <td class="w-3">
+                                <button type="button" class="btn btn-info" disabled>№:
+                                    {{ add_number.number }}
+                                </button></td>
+                    <td class="w-45">
+                                {{ add_number.created|date:"d.m.Y" }}
+                            </td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

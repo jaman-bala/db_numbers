@@ -1,25 +1,25 @@
 from django.db import models
 
 
-class Category_Region(models.Model):
-    title = models.CharField("Регионы", max_length=50, unique=True)
+class Category_Unaa(models.Model):
+    title = models.CharField("Наименование отделов", max_length=50, unique=True)
     slug = models.SlugField(max_length=50, unique=True)
 
     class Meta:
-        verbose_name = "регион"
-        verbose_name_plural = "Добавление региона"
+        verbose_name = "подраздиления"
+        verbose_name_plural = "Подраздиление УНАА"
 
     def __str__(self):
         return self.title
 
 
-class Category_Unaa(models.Model):
-    title = models.CharField("Отделение", max_length=50, unique=True)
+class Category_Types(models.Model):
+    title = models.CharField("Типы", max_length=50, unique=True)
     slug = models.SlugField(max_length=50, unique=True)
 
     class Meta:
-        verbose_name = "подраздиления"
-        verbose_name_plural = "Добавление отдела УНАА"
+        verbose_name = "типы"
+        verbose_name_plural = "Типы"
 
     def __str__(self):
         return self.title
@@ -31,26 +31,27 @@ class Category_Number(models.Model):
 
     class Meta:
         verbose_name = "номера "
-        verbose_name_plural = "Добавить регионый номер"
+        verbose_name_plural = "Региональный номер"
 
     def __str__(self):
         return self.title
 
 
 class Add_Numbers(models.Model):
-    category_region = models.ForeignKey(Category_Region, verbose_name='Регион', on_delete=models.PROTECT)
-    category_unaa = models.ForeignKey(Category_Unaa, verbose_name='Отделение', on_delete=models.PROTECT)
-    category_number = models.ForeignKey(Category_Number, verbose_name='Гос номер', on_delete=models.PROTECT)
-    title = models.CharField(verbose_name="ввод номера", max_length=200)
+    category_unaa = models.ForeignKey(Category_Unaa, verbose_name='Отделение', on_delete=models.CASCADE)
+    category_types = models.ForeignKey(Category_Types, verbose_name='Типы', on_delete=models.CASCADE)
+    category_number = models.ForeignKey(Category_Number, verbose_name='Гос номер', on_delete=models.CASCADE)
+    title = models.CharField(verbose_name="Гос номер", max_length=50)
+    number = models.CharField(verbose_name="Номер заявки", max_length=50)
     is_active = models.BooleanField("Активный", default=True)
 
     created = models.DateTimeField(verbose_name="Дата создание", auto_now_add=True)
     updated = models.DateTimeField(verbose_name="Дата обновления", auto_now=True)
 
     class Meta:
-        ordering = ["created"]
+        ordering = ["-created"]
         verbose_name = "Добовления номеров в базу"
         verbose_name_plural = "Общая база номеров"
 
     def __str__(self):
-        return f'{self.category_region} - {self.category_unaa} - {self.category_number} - {self.title}'
+        return f'{self.category_types} - {self.category_unaa} - {self.category_number} - {self.title}'

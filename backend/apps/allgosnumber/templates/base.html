@@ -34,13 +34,13 @@
                 Главная
             </a>
         </li>
-        {% for category_reg in qs_region %}
+        {% for category_unaa in qs_unaa %}
         <li>
-            <a href="{{ 'category_reg.id' }}" class="nav-link text-white">
+            <a href="{% url 'unaa_detail' category_unaa.id %}" class="nav-link text-white">
                 <svg class="bi pe-none me-2" width="16" height="16">
                     <use xlink:href="#speedometer2"></use>
                 </svg>
-                {{ category_reg.title }}
+                {{ category_unaa.title }}
             </a>
         </li>
         {% endfor %}
