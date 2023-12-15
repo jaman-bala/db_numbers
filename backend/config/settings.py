@@ -2,10 +2,11 @@ import os
 from pathlib import Path
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-cg5cava2*ry3k2twas^afax#*1(z9)4n)+3+gk@px8s9gy(t8('
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ['http://192.168.56.67']
 
 
 INSTALLED_APPS = [
@@ -52,19 +53,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.config.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.NUMBERS',
+        'NAME': os.path.join(BASE_DIR, 'db.NUMBERS'),
     }
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
