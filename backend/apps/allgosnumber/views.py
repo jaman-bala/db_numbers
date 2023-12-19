@@ -28,6 +28,7 @@ def get_index(request):
     except EmptyPage:
         add_numbers = paginator.page(paginator.num_pages)
 
+
     context = {
                'add_numbers': add_numbers,
                'qs_region': qs_region,
@@ -41,11 +42,23 @@ def get_index(request):
 
 def unaa_detail(request, unaa_id):
     unaa = get_object_or_404(Category_Unaa, id=unaa_id)
-    add_numbers = Add_Numbers.objects.filter(category_unaa=unaa,)
+    category_types = Category_Types.objects.filter(add_numbers__category_unaa=unaa).distinct()
+
+    list_products = Add_Numbers.objects.filter(category_unaa=unaa)
+    last_add_numbers = []
+
+    for category_type in category_types:
+        last_add_number = list_products.filter(category_types=category_type).latest('created')
+        last_add_numbers.append(last_add_number)
 
     context = {
-        'add_numbers': add_numbers,
         'unaa': unaa,
+        'category_types': category_types,
+        'last_add_numbers': last_add_numbers,
     }
 
     return render(request, 'allgosnumbers/unaa_detail.html', context)
+
+
+
+

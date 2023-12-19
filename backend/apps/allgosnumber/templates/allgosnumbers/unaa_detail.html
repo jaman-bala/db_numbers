@@ -3,42 +3,44 @@
 {% load static %}
 
 <div class="container mt-5 m-2">
-    <h2>Отдел: {{ unaa.title }}</h2>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Тип</th>
-            <th>Региональный номер</th>
-            <th>Гос номер</th>
-            <th>Номер заявки</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for add_number in add_numbers %}
-        <tr>
-            <td>{{ add_number.category_types }}</td>
-            <td class="w-3">
-                <button type="button" class="btn btn-outline-dark" disabled>
-                    {{ add_number.category_number }}
-                </button>
-            </td>
-            <td class="w-3">
-                <button type="button" class="btn btn-light" disabled>
-                    {{ add_number.title }}
-                </button>
-            </td>
-            <td class="w-3">
-                <button type="button" class="btn btn-info" disabled>№:
-                    {{ add_number.number }}
-                </button>
-            </td>
-            <td class="w-45">
-                {{ add_number.created|date:"d.m.Y" }}
-            </td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <h2 class="mt-5">Отдел: {{ unaa.title }}</h2>
+    {% for last_add_number in last_add_numbers %}
+        <h3 class="mt-5"></h3>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Типы</th>
+                <th>Код региона</th>
+                <th>Гос номер</th>
+                <th>Номер заявки</th>
+                <th>Дата создания</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td width="120" height="50">
+                        {{ last_add_number.category_types.title }}
+                    </td>
+                    <td width="40" height="50">
+                        <button type="button" class="btn btn-outline-dark" disabled>
+                            {{ last_add_number.category_number }}
+                        </button>
+                    </td>
+                    <td width="50" height="50">
+                        <button type="button" class="btn btn-light" disabled>
+                            {{ last_add_number.number }}
+                        </button>
+                    </td>
+                    <td width="50" height="50">
+                        <button type="button" class="btn btn-info" disabled>№: {{ last_add_number.application }}</button>
+                    </td>
+                    <td width="50" height="50">
+                        {{ last_add_number.created|date:"d.m.Y" }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    {% endfor %}
 </div>
 
 {% endblock %}

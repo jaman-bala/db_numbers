@@ -5,19 +5,19 @@ from .models import Category_Types, Category_Number, Category_Unaa, Add_Numbers
 @admin.register(Category_Types)
 class Category_Types(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
-    list_display = ("id", "title")
+    list_display = ("title", "id")
 
 
 @admin.register(Category_Unaa)
 class Category_Unaa(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
-    list_display = ("id", "title")
+    list_display = ("title", "id")
 
 
 @admin.register(Category_Number)
 class Category_Number(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
-    list_display = ("id", "title")
+    list_display = ("title", "id")
 
 
 @admin.register(Add_Numbers)
@@ -26,13 +26,13 @@ class Add_Numbers(admin.ModelAdmin):
         "category_types",
         "category_unaa",
         "category_number",
-        "title",
         "number",
+        "application",
         "is_active",
         "created",
     )
     search_fields = (
-        "title",
+        "application",
 
     )
     list_filter = (

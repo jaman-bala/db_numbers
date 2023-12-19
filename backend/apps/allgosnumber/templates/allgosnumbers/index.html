@@ -32,10 +32,10 @@
                                 </button>
                             </td>
                             <td class="w-3">
-                                <button type="button" class="btn btn-light" disabled>{{ list_prod.title }}</button>
+                                <button type="button" class="btn btn-light" disabled>{{ list_prod.number }}</button>
                             </td>
                             <td class="w-3">
-                                <button type="button" class="btn btn-info" disabled>№: {{ list_prod.number }}</button>
+                                <button type="button" class="btn btn-info" disabled>№: {{ list_prod.application }}</button>
                             </td>
                             <td class="w-45">
                                 {{ list_prod.created|date:"d.m.Y" }}
@@ -88,7 +88,7 @@
                                     {{ form.category_unaa }}
                             </div>
                             <div class="mb-3">
-                                <label class="form-label"><strong>Отдел УНАА</strong></label>
+                                <label class="form-label"><strong>Типы</strong></label>
                                      {{ form.category_types }}
                             </div>
                             <div class="mb-3">
@@ -99,12 +99,12 @@
                                 <div class="col-auto">
                                     <label class="form-label"><strong>Гос гомер</strong></label>
                                     <label class="visually-hidden">Ввод</label>
-                                            {{ form.title }}
+                                            {{ form.number }}
                                 </div>
                                 <div class="col-auto">
                                     <label class="form-label"><strong>Номер договора</strong></label>
                                     <label class="visually-hidden">Ввод</label>
-                                            {{ form.number }}
+                                            {{ form.application }}
                                 </div>
                                 <div class="col-auto">
                                     <button type="submit" class="btn btn-primary mb-3 mt-4">Добавить</button>
