@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Add_Numbers, Category_Number, Category_Unaa, Category_Types
 from .forms import CreateForm
 
 
+@login_required
 def get_index(request):
     add_numbers = Add_Numbers.objects.all()
     qs_region = Category_Types.objects.filter(add_numbers__in=add_numbers).distinct()
@@ -40,6 +42,7 @@ def get_index(request):
     return render(request, 'allgosnumbers/index.html', context)
 
 
+@login_required
 def unaa_detail(request, unaa_id):
     unaa = get_object_or_404(Category_Unaa, id=unaa_id)
     category_types = Category_Types.objects.filter(add_numbers__category_unaa=unaa).distinct()
