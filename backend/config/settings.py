@@ -90,11 +90,12 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Настройки статических файлов
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, '/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
-# MEDIA
+# Настройки медиафайлов
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
