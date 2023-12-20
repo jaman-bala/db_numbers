@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en" >
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <title>EstEtmE</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="{% static './src/css/account.css' %}" media="screen">
+
+</head>
+<body>
+
+<div id="login-form-wrap">
+  <h2>Login</h2>
+  <form id="login-form"  action="" method="POST">
+    {% csrf_token %}
+    <p>
+      {{form.username}}
+    <i class="validation"><span></span><span></span></i>
+    </p>
+    <p>{{form.password}}
+    <i class="validation"><span></span><span></span></i>
+    </p>
+    <p>
+    <input type="submit" id="login" value="Login">
+    </p>
+  </form>
+  <div id="create-account-wrap">
+    <p>Забыли пароль? <a href="#">Обратитесь IT-специалисту</a><p>
+  </div>
+</div>
+
+
+</body>
+</html>
