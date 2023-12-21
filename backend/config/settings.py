@@ -4,8 +4,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-cg5cava2*ry3k2twas^afax#*1(z9)4n)+3+gk@px8s9gy(t8('
 DEBUG = False
-ALLOWED_HOSTS = ["192.168.56.67", "http://dbnumber"]
-# ALLOWED_HOSTS = ["*"]
+# ALLOWED_HOSTS = ["192.168.56.67", "http://dbnumbers.srs.kg"]
+ALLOWED_HOSTS = ["*"]
 
 
 INSTALLED_APPS = [
@@ -29,6 +29,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'backend.config.urls'
@@ -58,7 +59,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.NUMBERS'),
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -92,8 +92,8 @@ USE_TZ = True
 
 # Настройки статических файлов
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = os.path.join(BASE_DIR, '/static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 # Настройки медиафайлов
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
