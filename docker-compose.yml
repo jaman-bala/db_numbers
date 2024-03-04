@@ -1,8 +1,8 @@
-version: "3.7"
+version: "3.8"
 
 services:
-  unaa_numbers_app:
-    container_name: numbers_app
+  app:
+    container_name: backend
     restart: always
     build:
       context: .
@@ -10,9 +10,9 @@ services:
     command: run
     volumes:
       - ./media:/app/media
-      - ./static:/app/static
+      - ./static:/app/backend/static
     env_file: .env
     ports:
-      - 127.0.0.1:8000:8000
+      - 0.0.0.0:8000:8000
 volumes:
   unaa-data:
