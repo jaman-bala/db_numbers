@@ -3,7 +3,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-cg5cava2*ry3k2twas^afax#*1(z9)4n)+3+gk@px8s9gy(t8('
-DEBUG = True
+DEBUG = False
 # ALLOWED_HOSTS = ["192.168.56.67", "http://dbnumbers.srs.kg"]
 ALLOWED_HOSTS = ["*"]
 
