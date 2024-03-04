@@ -96,6 +96,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
+
 # Настройки медиафайлов
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
