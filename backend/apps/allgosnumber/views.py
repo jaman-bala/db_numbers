@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from .models import Add_Numbers, Category_Number, Category_Unaa, Category_Types
 from .forms import CreateForm
 
@@ -29,6 +31,16 @@ def get_index(request):
         add_numbers = paginator.page(1)
     except EmptyPage:
         add_numbers = paginator.page(paginator.num_pages)
+
+    def get_queryset(self):  # new
+        query = self.request.GET.get("q")
+        if query:
+            object_list = Add_Numbers.objects.filter(
+                Q(author__icontains=query) | Q(title__icontains=query)
+            )
+        else:
+            object_list = Add_Numbers.objects.all()
+        return object_list
 
 
     context = {

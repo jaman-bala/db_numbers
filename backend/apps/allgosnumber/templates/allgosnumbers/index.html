@@ -1,10 +1,26 @@
-{% extends 'base.html' %} {% block content %} {% load static %}
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
 
 <div class="container mt-5 m-2">
+    <div class="input-group">
+    <div class="form-outline" data-mdb-input-init>
+        <form method="GET">
+            <input type="search" id="form1" class="form-control" name="q" placeholder="Search..." value="{{ request.GET.q }}">
+            <label class="form-label" for="form1">Search</label>
+            <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
+
     <div class="row">
         <div class="col">
             <div class="card" style="width: 60rem;">
                 <div class="card-body">
+
                     <table class="table table-bordered">
                         <tr class="table-dark text-center">
                             <th class="w-3">№</th>
@@ -16,55 +32,41 @@
                             <th class="w-3">Дата создания</th>
                         </tr>
                         {% for list_prod in add_numbers %}
-                        <tr class="text-center">
-                            <td class="w-3">
-                                {{ list_prod.id }}
-                            </td>
-                            <td class="w-45">
-                                {{ list_prod.category_unaa }}
-
-                            </td>
-                            <td class="w-45">
-                                {{ list_prod.category_types }}
-                            </td>
-                            <td class="w-3">
-                                <button type="button" class="btn btn-outline-dark" disabled>{{ list_prod.category_number }}
-                                </button>
-                            </td>
-                            <td class="w-3">
-                                <button type="button" class="btn btn-light" disabled>{{ list_prod.number }}</button>
-                            </td>
-                            <td class="w-3">
-                                <button type="button" class="btn btn-info" disabled>№: {{ list_prod.application }}</button>
-                            </td>
-                            <td class="w-45">
-                                {{ list_prod.created|date:"d.m.Y" }}
-                            </td>
-                        </tr>
-                        {% endfor %}
+    {% if not request.GET.q or request.GET.q in list_prod.number or request.GET.q in list_prod.application %}
+        <tr class="text-center">
+            <td class="w-3">{{ list_prod.id }}</td>
+            <td class="w-45">{{ list_prod.category_unaa }}</td>
+            <td class="w-45">{{ list_prod.category_types }}</td>
+            <td class="w-3"><button type="button" class="btn btn-outline-dark" disabled>{{ list_prod.category_number }}</button></td>
+            <td class="w-3"><button type="button" class="btn btn-light" disabled>{{ list_prod.number }}</button></td>
+            <td class="w-3"><button type="button" class="btn btn-info" disabled>№: {{ list_prod.application }}</button></td>
+            <td class="w-45">{{ list_prod.created|date:"d.m.Y" }}</td>
+        </tr>
+    {% endif %}
+{% endfor %}
                     </table>
+
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
                             <li class="page-item">
                                 {% if add_numbers.has_previous %}
-                                <a class="page-link" href="?page=1" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
+                                    <a class="page-link" href="?page={{ add_numbers.previous_page_number }}&q={{ request.GET.q }}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
                                 {% endif %}
                             </li>
 
                             {% for page_num in add_numbers.paginator.page_range %}
-                            <li class="page-item {% if add_numbers.number == page_num %}active{% endif %}">
-                                <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
-                            </li>
+                                <li class="page-item {% if add_numbers.number == page_num %}active{% endif %}">
+                                    <a class="page-link" href="?page={{ page_num }}&q={{ request.GET.q }}">{{ page_num }}</a>
+                                </li>
                             {% endfor %}
 
                             <li class="page-item">
                                 {% if add_numbers.has_next %}
-                                <a class="page-link" href="?page={{ add_numbers.paginator.num_pages }}"
-                                   aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
+                                    <a class="page-link" href="?page={{ add_numbers.next_page_number }}&q={{ request.GET.q }}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
                                 {% endif %}
                             </li>
                         </ul>
@@ -76,45 +78,45 @@
 </div>
 
 <div class="container mt-5">
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-body">
-                    <form action="." method="POST">
-                        {% csrf_token %}
-                        <fieldset>
-                            <legend class="text-center"><strong>Добавление номеров в базу</strong></legend>
-                            <div class="mb-3">
-                                <label class="form-label"><strong>Отделы УНАА</strong></label>
-                                    {{ form.category_unaa }}
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-body">
+                <form action="." method="POST">
+                    {% csrf_token %}
+                    <fieldset>
+                        <legend class="text-center"><strong>Добавление номеров в базу</strong></legend>
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Отделы УНАА</strong></label>
+                            {{ form.category_unaa }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Типы</strong></label>
+                            {{ form.category_types }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Региональный номер</strong></label>
+                            {{ form.category_number }}
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-auto">
+                                <label class="form-label"><strong>Гос гомер</strong></label>
+                                <label class="visually-hidden">Ввод</label>
+                                {{ form.number }}
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label"><strong>Типы</strong></label>
-                                     {{ form.category_types }}
+                            <div class="col-auto">
+                                <label class="form-label"><strong>Номер договора</strong></label>
+                                <label class="visually-hidden">Ввод</label>
+                                {{ form.application }}
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label"><strong>Региональный номер</strong></label>
-                                    {{ form.category_number }}
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary mb-3 mt-4">Добавить</button>
                             </div>
-                            <div class="row g-4">
-                                <div class="col-auto">
-                                    <label class="form-label"><strong>Гос гомер</strong></label>
-                                    <label class="visually-hidden">Ввод</label>
-                                            {{ form.number }}
-                                </div>
-                                <div class="col-auto">
-                                    <label class="form-label"><strong>Номер договора</strong></label>
-                                    <label class="visually-hidden">Ввод</label>
-                                            {{ form.application }}
-                                </div>
-                                <div class="col-auto">
-                                    <button type="submit" class="btn btn-primary mb-3 mt-4">Добавить</button>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
         </div>
+    </div>
 </div>
 
 {% endblock %}
