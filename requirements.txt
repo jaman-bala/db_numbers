@@ -3,4 +3,3 @@ pillow==10.1.0
 djangorestframework
 djangorestframework-simplejwt
 psycopg2==2.9.5
-Pillow==9.3.0
