@@ -30,7 +30,7 @@
                             <th class="w-3">Дата создания</th>
                         </tr>
 {% for list_prod in add_numbers %}
-    {% if not request.GET.q or request.GET.q|lower in list_prod.category_types|lower %}
+    {% if not request.GET.q or request.GET.q|lower in list_prod.category_number|lower %}
         <tr class="text-center">
             <td class="w-45">{{ list_prod.category_unaa }}</td>
             <td class="w-45">{{ list_prod.category_types }}</td>
