@@ -102,10 +102,10 @@ USE_TZ = True
 
 # Настройки статических файлов
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static') # для сервера
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"), # для локального пользования
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static') # для сервера
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"), # для локального пользования
+# ]
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
