@@ -41,7 +41,7 @@ class Add_Numbers(models.Model):
     category_unaa = models.ForeignKey(Category_Unaa, verbose_name='Отделение', on_delete=models.CASCADE)
     category_types = models.ForeignKey(Category_Types, verbose_name='Типы', on_delete=models.CASCADE)
     category_number = models.ForeignKey(Category_Number, verbose_name='Гос номер', on_delete=models.CASCADE)
-    number = models.CharField(verbose_name="Гос номер", max_length=50, primary_key=True)
+    number = models.CharField(verbose_name="Гос номер", max_length=50)
     application = models.CharField(verbose_name="Номер заявки", max_length=50)
 
     is_active = models.BooleanField("Активный", default=True)
