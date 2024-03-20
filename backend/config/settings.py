@@ -62,9 +62,9 @@ WSGI_APPLICATION = 'backend.config.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.getenv("POSTGRES_DB", default="db"),
-        "USER": os.getenv("POSTGRES_USER", default="db_number"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD", default="db_ZAQ12345tgb"),
+        "NAME": os.getenv("POSTGRES_DB", default="numer_db"),
+        "USER": os.getenv("POSTGRES_USER", default="user_number"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD", default="ZAQ12345tgb"),
         "HOST": os.getenv("POSTGRES_HOST", default="127.0.0.1"),
         "PORT": os.getenv("POSTGRES_PORT", default="5432"),
     }
