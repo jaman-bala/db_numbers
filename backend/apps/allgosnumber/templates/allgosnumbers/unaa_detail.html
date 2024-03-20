@@ -21,7 +21,6 @@
                 <div class="card-body">
                     <table class="table table-bordered">
                         <tr class="table-dark text-center">
-                            <th class="w-3">№</th>
                             <th class="w-45">Отделы</th>
                             <th class="w-3">Тип</th>
                             <th class="w-3">Номер региона</th>
@@ -32,7 +31,6 @@
 {% for list_prod in add_numbers %}
     {% if not request.GET.q or request.GET.q|lower in list_prod.category_number|lower %}
         <tr class="text-center">
-            <td class="w-3">{{ list_prod.id }}</td>
             <td class="w-45">{{ list_prod.category_unaa }}</td>
             <td class="w-45">{{ list_prod.category_types }}</td>
             <td class="w-3"><button type="button" class="btn btn-outline-dark">{{ list_prod.category_number }}</button></td>
