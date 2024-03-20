@@ -2,6 +2,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get("SECRET_KEY")
+
 DEBUG = False
 ALLOWED_HOSTS = ["*"]
 
@@ -51,23 +52,23 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.config.wsgi.application'
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.NUMBERS'),
-#     }
-# }
-
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.getenv("POSTGRES_DB", default="db"),
-        "USER": os.getenv("POSTGRES_USER", default="db_number"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD", default="db_ZAQ12345tgb"),
-        "HOST": os.getenv("POSTGRES_HOST", default="127.0.0.1"),
-        "PORT": os.getenv("POSTGRES_PORT", default="5432"),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.NUMBERS'),
     }
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "NAME": os.getenv("POSTGRES_DB", default="db"),
+#         "USER": os.getenv("POSTGRES_USER", default="db_number"),
+#         "PASSWORD": os.getenv("POSTGRES_PASSWORD", default="db_ZAQ12345tgb"),
+#         "HOST": os.getenv("POSTGRES_HOST", default="127.0.0.1"),
+#         "PORT": os.getenv("POSTGRES_PORT", default="5432"),
+#     }
+# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -101,8 +102,10 @@ USE_TZ = True
 
 # Настройки статических файлов
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static') # для сервера
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"), # для локального пользования
+]
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 

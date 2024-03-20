@@ -3,44 +3,109 @@
 {% load static %}
 
 <div class="container mt-5 m-2">
-    <h2 class="mt-5">Отдел: {{ unaa.title }}</h2>
-    {% for last_add_number in last_add_numbers %}
-        <h3 class="mt-5"></h3>
+    <div class="input-group">
+        <div class="form-outline" data-mdb-input-init>
+            <form method="GET">
+                <input type="search" id="form1" class="form-control" name="q" placeholder="Search..." value="{{ request.GET.q }}">
+                <label class="form-label" for="form1">Search</label>
+                <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card" style="width: 60rem;">
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <tr class="table-dark text-center">
+                            <th class="w-45">Отделы</th>
+                            <th class="w-3">Тип</th>
+                            <th class="w-3">Номер региона</th>
+                            <th class="w-3">Гос номер</th>
+                            <th class="w-3">Номер договора</th>
+                            <th class="w-3">Дата создания</th>
+                        </tr>
+{% for list_prod in add_numbers %}
+    {% if not request.GET.q or request.GET.q|lower in list_prod.category_types|lower %}
+        <tr class="text-center">
+            <td class="w-45">{{ list_prod.category_unaa }}</td>
+            <td class="w-45">{{ list_prod.category_types }}</td>
+            <td class="w-3"><button type="button" class="btn btn-outline-dark">{{ list_prod.category_number }}</button></td>
+            <td class="w-3"><button type="button" class="btn btn-light" disabled>{{ list_prod.number }}</button></td>
+            <td class="w-3"><button type="button" class="btn btn-info" disabled>№: {{ list_prod.application }}</button></td>
+            <td class="w-45">{{ list_prod.created|date:"d.m.Y" }}</td>
+        </tr>
+    {% endif %}
+{% endfor %}
+
+
+
+                    </table>
+
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                {% if add_numbers.has_previous %}
+                                    <a class="page-link" href="?page={{ add_numbers.previous_page_number }}&q={{ request.GET.q }}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                {% endif %}
+                            </li>
+
+                            {% for page_num in add_numbers.paginator.page_range %}
+                                <li class="page-item {% if add_numbers.number == page_num %}active{% endif %}">
+                                    <a class="page-link" href="?page={{ page_num }}&q={{ request.GET.q }}">{{ page_num }}</a>
+                                </li>
+                            {% endfor %}
+
+                            <li class="page-item">
+                                {% if add_numbers.has_next %}
+                                    <a class="page-link" href="?page={{ add_numbers.next_page_number }}&q={{ request.GET.q }}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5 m-2">
+        <h2 class="mt-5">Отдел: {{ unaa.title }}</h2>
         <table class="table table-bordered">
             <thead>
-            <tr>
-                <th>Типы</th>
-                <th>Код региона</th>
-                <th>Гос номер</th>
-                <th>Номер заявки</th>
-                <th>Дата создания</th>
-            </tr>
+                <tr>
+                    <th>Типы</th>
+                    <th>Код региона</th>
+                    <th>Гос номер</th>
+                    <th>Номер заявки</th>
+                    <th>Дата создания</th>
+                </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td width="120" height="50">
-                        {{ last_add_number.category_types.title }}
-                    </td>
-                    <td width="40" height="50">
-                        <button type="button" class="btn btn-outline-dark" disabled>
-                            {{ last_add_number.category_number }}
-                        </button>
-                    </td>
-                    <td width="50" height="50">
-                        <button type="button" class="btn btn-light" disabled>
-                            {{ last_add_number.number }}
-                        </button>
-                    </td>
-                    <td width="50" height="50">
-                        <button type="button" class="btn btn-info" disabled>№: {{ last_add_number.application }}</button>
-                    </td>
-                    <td width="50" height="50">
-                        {{ last_add_number.created|date:"d.m.Y" }}
-                    </td>
-                </tr>
+                {% for last_add_number in last_add_numbers %}
+                    <tr>
+                        <td width="120" height="50">{{ last_add_number.category_types.title }}</td>
+                        <td width="40" height="50">
+                            <button type="button" class="btn btn-outline-dark" disabled>{{ last_add_number.category_number }}</button>
+                        </td>
+                        <td width="50" height="50">
+                            <button type="button" class="btn btn-light" disabled>{{ last_add_number.number }}</button>
+                        </td>
+                        <td width="50" height="50">
+                            <button type="button" class="btn btn-info" disabled>№: {{ last_add_number.application }}</button>
+                        </td>
+                        <td width="50" height="50">{{ last_add_number.created|date:"d.m.Y" }}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
-    {% endfor %}
+    </div>
 </div>
 
 {% endblock %}
