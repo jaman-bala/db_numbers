@@ -10,7 +10,7 @@ services:
     command: run
     volumes:
       - ./media:/app/media
-      - ./static:/app/backend/static  # Изменено вот здесь
+      - static:/app/backend/static  # Исправлено здесь
     env_file: .env.example
     ports:
       - 0.0.0.0:8000:8000
