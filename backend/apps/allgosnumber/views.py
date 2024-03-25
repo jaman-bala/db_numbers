@@ -76,6 +76,16 @@ def unaa_detail(request, unaa_id):
         last_add_number = all_add_numbers.filter(category_types=category_type).latest('created')
         last_add_numbers.append(last_add_number)
 
+    page = request.GET.get('page', 1)
+    paginator = Paginator(all_add_numbers, 15)  # Показывать 15 камер на странице
+    try:
+        all_add_numbers = paginator.page(page)
+    except PageNotAnInteger:
+        all_add_numbers = paginator.page(1)
+    except EmptyPage:
+        all_add_numbers = paginator.page(paginator.num_pages)
+
+
     context = {
         'unaa': unaa,
         'category_types': category_types,
