@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  app:
+ app:
     container_name: backend
     restart: always
     build:
@@ -10,16 +10,16 @@ services:
     command: run
     volumes:
       - ./media:/app/media
-      - ./static:/app/backend/static
+      - ./static:/app/backend/static  # Изменено вот здесь
     env_file: .env.example
     ports:
-      - 127.0.0.1:8000:8000
+      - 0.0.0.0:8000:8000
     links:
       - db
     depends_on:
-        - db
+      - db
 
-  db:
+ db:
     container_name: db
     restart: always
     image: postgres:12.4-alpine
@@ -30,5 +30,5 @@ services:
       - 5432
 
 volumes:
-  postgres-data:
-  static:
+ postgres-data:
+ static:
